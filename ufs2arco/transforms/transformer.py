@@ -16,6 +16,7 @@ class Transformer:
         return (
             "multiply",
             "divide",
+            "reindex",
             "fv_vertical_regrid",
             "horizontal_regrid",
             "mappings",
@@ -82,6 +83,9 @@ class Transformer:
         if "divide" in self.names:
             xds = divide(xds, self.options["divide"])
 
+        if "reindex" in self.names:
+            xds = reindex(xds, self.options["reindex"])
+
         if "rotate_vectors" in self.names:
             xds = rotate_vectors(xds, **self.options["rotate_vectors"])
 
@@ -134,4 +138,21 @@ def divide(xds, config):
     for varname, scalar in config.items():
         if varname in xds:
             xds[varname] = xds[varname] / scalar
+    return xds
+
+def reindex(xds, config):
+    """
+    Reindex latitude to [-90, 90]
+
+    Args:
+        xds (xr.Dataset): the dataset from source
+        config (dict): with pattern
+            {varname: boolean}
+
+    Returns:
+        xds (xr.Dataset): with new dataset
+    """
+    for cordname, scalar in config.items():
+        if (cordname in xds.coords) and scalar:
+            xds = xds.reindex(latitude=list(reversed(xds.latitude)))
     return xds
