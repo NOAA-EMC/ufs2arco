@@ -36,6 +36,8 @@ class NOAAGribForecastData:
             return "gdas"
         elif "hrrr" in self.name.lower():
             return "hrrr"
+        elif "hres" in self.name.lower():
+            return "hres"
         else:
             raise NotImplementedError(f"ufs2arco.sources.NOAAGribForecastData could not recognize forecast system with name = {self.name}")
 
