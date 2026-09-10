@@ -11,15 +11,17 @@ from ufs2arco.sources import Source, NOAAGribForecastData
 
 logger = logging.getLogger("ufs2arco")
 
-class GDASLocalArchive(NOAAGribForecastData, Source):
+class LocalGFSBase(NOAAGribForecastData, Source):
     """
-    Access 0.25 or 1.0 degree archives of GDASv17 archived on Ursa
+    Access 0.25 or 1.0 degree local archives of GFS/GDAS
     """
 
     sample_dims = ("t0", "fhr")
     horizontal_dims = ("latitude", "longitude")
     file_suffixes = ("", "b")
     static_vars = ("lsm", "orog")
+    
+    dataset_name = None
 
     @property
     def available_levels(self) -> tuple:
@@ -119,14 +121,33 @@ class GDASLocalArchive(NOAAGribForecastData, Source):
         Returns:
             str: The constructed file path.
         """
+        file_group = {
+            "": "pres_a",
+            "b": "pres_b",
+        }[file_suffix]
+        
         res = self.resolution
         cycle = t0.strftime("%H")
         directory = t0.strftime("%Y%m%d%H")
-        #root = "/scratch3/NAGAPE/gpu-ai4wp/Jun.Wang/gfsv17"
-        fname = f"gdas.t{cycle}z.pres_a.{res}.f{fhr:03d}.grib2"
-        return str(self.root / "gdas" / directory / fname)
+        
+        filename = f"{self.dataset_name}.t{cycle}z.{file_group}.{res}.f{fhr:03d}.grib2"
+        return str(self.root / self.dataset_name / directory / filename)
     
     def _open_local(self, dims, file_suffix, cache_dir):
         """Local files do not need fsspec's downoad cache."""
         path = self._build_path(**dims, file_suffix=file_suffix)
         return path if os.path.isfile(path) else None
+
+class LocalGDAS(LocalGFSBase):
+    dataset_name = "gdas"
+    
+    @property
+    def _fsname(self):
+        return "gdas"
+    
+class LocalGFS(LocalGFSBase):
+    dataset_name = "gfs"
+    
+    @property
+    def _fsname(self):
+        return "gfs"
