@@ -155,7 +155,7 @@ avg_prate:
   forecast_only: true
   long_name: Time-mean Precipitation rate
   original_name: prate
-avg_sdlwrf:
+avg_sdlwrf: #W m**-2, need to covert to J m**-2 to match era5
   file_suffixes:
   - ''
   filter_by_keys:
@@ -165,7 +165,7 @@ avg_sdlwrf:
   forecast_only: true
   long_name: Time-mean Surface downward long-wave radiation flux
   original_name: sdlwrf
-avg_sdswrf:
+avg_sdswrf: #W m**-2, need to covert to J m**-2 to match era5
   file_suffixes:
   - ''
   filter_by_keys:
@@ -667,13 +667,83 @@ prmsl:
   forecast_only: false
   long_name: Pressure reduced to MSL
 
-# stl1:
-  # file_suffixes:  
-  # - ''
-  # filter_by_keys:
-    # level: 0.0 - 0.1
-    # paramId: 228139
-    # typeOfLevel: depthBelowLandLayer
-  # forecast_only: false
-  # long_name: Soil temperature
-  # original_name: st    
+soill:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    paramId: 260205
+    typeOfLevel: depthBelowLandLayer
+    level: 0
+  forecast_only: false
+  long_name: Liquid volumetric soil moisture (non-frozen)
+
+st:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    paramId: 228139
+    typeOfLevel: depthBelowLandLayer
+    level: 0
+  forecast_only: false
+  long_name: Soil temperature
+
+tcc: 
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    level: 0
+    paramId: 228164
+    typeOfLevel: atmosphere
+  forecast_only: false
+  long_name: Total Cloud Cover
+
+hcc:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    level: 0
+    paramId: 3075
+    typeOfLevel: highCloudLayer
+  forecast_only: false
+  long_name: High cloud cover
+
+mcc:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    level: 0
+    paramId: 3074
+    typeOfLevel: middleCloudLayer
+  forecast_only: false
+  long_name: Medium cloud cover
+
+lcc:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    level: 0
+    paramId: 3073
+    typeOfLevel: lowCloudLayer
+  forecast_only: false
+  long_name: Low cloud cover
+
+#sf:
+#  file_suffixes:  
+#  - ''
+#  filter_by_keys:
+#    level: 0
+#    paramId: 260181
+#    typeOfLevel: surface
+#  forecast_only: false
+#  long_name: Snowfall
+
+tcwv:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    level: 0
+    paramId: 3054
+    typeOfLevel: atmosphereSingleLayer
+  forecast_only: false
+  long_name: Precipitable water
+  original_name: pwat

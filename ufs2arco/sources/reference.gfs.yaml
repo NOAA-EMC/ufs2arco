@@ -406,7 +406,7 @@ sde:
     typeOfLevel: surface
   forecast_only: false
   long_name: Snow depth
-sdwe:
+sdwe: #kg m-2
   file_suffixes:
   - ''
   filter_by_keys:
@@ -621,3 +621,69 @@ prmsl:
   forecast_only: false
   long_name: Pressure reduced to MSL
 
+soill:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    paramId: 260205
+    typeOfLevel: depthBelowLandLayer
+    level: 0
+  forecast_only: false
+  long_name: Liquid volumetric soil moisture (non-frozen)
+
+st:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    paramId: 228139
+    typeOfLevel: depthBelowLandLayer
+    level: 0
+  forecast_only: false
+  long_name: Soil temperature
+
+tcc:
+  file_suffixes:
+  - ''
+  filter_by_keys:
+    paramId: 228164
+    stepType: instant
+    typeOfLevel: atmosphere
+  forecast_only: false
+  long_name: Total Cloud Cover
+hcc:
+  file_suffixes:
+  - ''
+  filter_by_keys:
+    paramId: 3075
+    stepType: instant
+    typeOfLevel: highCloudLayer
+  forecast_only: false
+  long_name: High Cloud Cover
+mcc:
+  file_suffixes:
+  - ''
+  filter_by_keys:
+    paramId: 3074
+    stepType: instant
+    typeOfLevel: middleCloudLayer
+  forecast_only: false
+  long_name: Medium cloud cover
+lcc:
+  file_suffixes:
+  - ''
+  filter_by_keys:
+    paramId: 3073
+    stepType: instant
+    typeOfLevel: lowCloudLayer
+  forecast_only: false
+  long_name: Low cloud cover
+tcwv:
+  file_suffixes:  
+  - ''
+  filter_by_keys:
+    level: 0
+    paramId: 3054
+    typeOfLevel: atmosphereSingleLayer
+  forecast_only: false
+  long_name: Precipitable water
+  original_name: pwat

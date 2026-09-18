@@ -36,6 +36,8 @@ class NOAAGribForecastData:
             return "gdas"
         elif "hrrr" in self.name.lower():
             return "hrrr"
+        elif "hres" in self.name.lower():
+            return "hres"
         else:
             raise NotImplementedError(f"ufs2arco.sources.NOAAGribForecastData could not recognize forecast system with name = {self.name}")
 
@@ -130,7 +132,8 @@ class NOAAGribForecastData:
         dsdict = {}
         osv = open_static_vars or self._open_static_vars(dims)
         variables = self.variables if osv else self.dynamic_vars
-        we_got_the_data = all(val is not None for val in cached_files.values())
+        #we_got_the_data = all(val is not None for val in cached_files.values())
+        we_got_the_data = any(val is not None for val in cached_files.values())
         if we_got_the_data:
             for varname in variables:
                 dslist = []

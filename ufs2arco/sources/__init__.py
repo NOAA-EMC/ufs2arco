@@ -8,6 +8,8 @@ from .gcs_era5_1degree import GCSERA5OneDegree
 from .gcs_replay_atmosphere import GCSReplayAtmosphere
 from .gfs_archive import GFSArchive
 from .gdas_archive import GDASArchive
+from .hres_archive import HRESArchive
+from .local_gfs import LocalGDAS, LocalGFS
 
 
 # writing something general is actually more work than
@@ -19,4 +21,7 @@ _recognized = {
     "gcs_replay_atmosphere": "GCSReplayAtmosphere",
     "gfs_archive": "GFSArchive",
     "gdas_archive": "GDASArchive",
+    "hres_archive": "HRESArchive",
+    "local_gdas": "LocalGDAS",
+    "local_gfs": "LocalGFS",
 }

@@ -351,6 +351,7 @@ class Driver:
 
     def get_missing_data_path(self, store_path) -> str:
         directory, zstore = os.path.split(store_path)
+        directory = directory or "."
         return f"{directory}/missing.{zstore}.yaml"
 
     def report_missing_data(self, missing_dims):
